@@ -51,7 +51,7 @@ public class SecurityConfigure {
 					// 비로그인 허용(POST)
 					requests.requestMatchers(HttpMethod.POST,"/api/members").permitAll(); // 회원가입 경로 누구나 접근 가능
 					
-					requests.requestMatchers(HttpMethod.POST, "api/members/**", "/api/reviews/*/replies", "/api/reviews/**","/api/members/images").authenticated();
+					requests.requestMatchers(HttpMethod.POST, "/api/members/**", "/api/reviews/*/replies", "/api/reviews/**","/api/members/images").authenticated();
 					
 					// 로그인 필요(GET)
 					
