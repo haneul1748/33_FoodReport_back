@@ -149,8 +149,8 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 		if (noticeResult == 0) {
 			throw new NoticeCreationException("존재하지 않는 공지사항이거나 수정에 실패했습니다.");
 		}
-		if (file != null && !file.isEmpty()) { // 새 파일이 존재함
-			if (url != null && !"".equals(url)) { // 기존 파일이 있음
+		if (url != null && !"".equals(url)) { // 기존 파일이 있음
+			if (file != null && !file.isEmpty()) { // 새 파일이 존재함
 				String imageUrl = fileService.store(file);
 				AdminNoticeImage image = AdminNoticeImage.builder().originName(file.getOriginalFilename())
 						.changeName(imageUrl).refNoticeNo(noticeNo).build();
@@ -163,8 +163,11 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 				}
 			}
 		} else { // 기존 파일이 없음
-			saveImage(file, noticeNo);
+			if (file != null && !file.isEmpty()) { // 새 파일이 존재함
+				saveImage(file, noticeNo);
+			}
 		}
+
 	}
 
 }
